@@ -7,7 +7,9 @@ import android.widget.Button
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.textfield.TextInputEditText
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class Ejercicio3 : AppCompatActivity() {
 
@@ -21,7 +23,10 @@ class Ejercicio3 : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ejercicio3)
-
+        var bolcorreo=false
+        var bolcontraseña=false
+        var bolcp=false
+        var boledad=false
 
 
         correo=findViewById<TextInputEditText>(R.id.correo)
@@ -37,8 +42,7 @@ class Ejercicio3 : AppCompatActivity() {
             }else if(!texto.contains("@gmail.com") && !texto.contains("@hotmail.com")){
                 correo.setError("El correo no puede estar incompleto")
             }else{
-                contraseña.isFocusable = true
-                contraseña.requestFocus()
+                bolcorreo=true
             }
         }
 
@@ -52,33 +56,38 @@ class Ejercicio3 : AppCompatActivity() {
                 if (!it.matches(regex)){
                     contraseña.setError("Debe contener al menos una letra minuscula, mayuscula y un numero")
                 }else{
-                    nombre.isFocusable=true
-                    nombre.requestFocus()
-                    cp.isFocusable=true
+                    bolcontraseña=true
                 }
             }
         }
 
-        nombre.doAfterTextChanged {
-            if (!it.isNullOrBlank()){
-                cp.requestFocus()
-            }else{
-                nombre.setError("Este campo no puede quedar vacio")
-            }
-        }
+
 
         cp.doAfterTextChanged {
             if(it.isNullOrBlank()){
-                edad.isFocusable=true
-                edad.requestFocus()
-            }else if(it.length==6){
-                edad.isFocusable=true
-                edad.requestFocus()
+                bolcp=true
+            }else if(it.length==5){
+                bolcp=true
             }else{
                 cp.setError("El codigo postal debe ser valido")
             }
         }
 
+
+        edad.after {
+            if(it.isNullOrBlank()){
+                edad.setError("Este campo no puede quedar vacio")
+            }else{
+
+                var split=it.split("/")
+                var año=split[2].toInt()
+                if(Calendar.YEAR-año>=18){
+                    boledad=true
+                }else{
+                    edad.setError("Debes ser mayor de edad")
+                }
+            }
+        }
 
         }
 
