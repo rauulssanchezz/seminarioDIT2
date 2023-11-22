@@ -17,6 +17,7 @@
        >
 
        <com.google.android.material.textfield.TextInputEditText
+           android:id="@+id/correo"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:hint="Correo"
@@ -39,6 +40,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/contraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contraseña"
@@ -46,6 +48,7 @@
             android:layout_marginEnd="15dp"
             android:layout_marginTop="15dp"
             android:inputType="textPassword"
+            android:focusable="false"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -59,6 +62,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre"
@@ -66,6 +70,7 @@
             android:layout_marginEnd="15dp"
             android:layout_marginTop="15dp"
             android:inputType="text"
+            android:focusable="false"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -79,6 +84,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/postal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="CP"
@@ -86,6 +92,7 @@
             android:layout_marginEnd="15dp"
             android:layout_marginTop="15dp"
             android:inputType="number"
+            android:focusable="false"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -99,6 +106,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nacimiento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Fecha de nacimiento"
@@ -106,6 +114,7 @@
             android:layout_marginEnd="15dp"
             android:layout_marginTop="15dp"
             android:inputType="date"
+            android:focusable="false"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <Button
@@ -121,5 +130,6 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:onClick="enviar"
+        android:focusable="false"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
