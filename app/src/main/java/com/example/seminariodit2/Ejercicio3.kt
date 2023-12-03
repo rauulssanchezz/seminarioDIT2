@@ -74,17 +74,18 @@ class Ejercicio3 : AppCompatActivity() {
         }
 
 
-        edad.after {
+        edad.doAfterTextChanged {
             if(it.isNullOrBlank()){
                 edad.setError("Este campo no puede quedar vacio")
             }else{
-
-                var split=it.split("/")
-                var año=split[2].toInt()
-                if(Calendar.YEAR-año>=18){
-                    boledad=true
-                }else{
-                    edad.setError("Debes ser mayor de edad")
+                if (edad.length()==10) {
+                    var split = it.split("/")
+                    var año = split[2].toInt()
+                    if (Calendar.YEAR - año >= 18) {
+                        boledad = true
+                    } else {
+                        edad.setError("Debes ser mayor de edad")
+                    }
                 }
             }
         }
