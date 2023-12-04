@@ -23,79 +23,88 @@ class Ejercicio3 : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ejercicio3)
-        var bolcorreo=false
-        var bolcontraseña=false
-        var bolcp=false
-        var boledad=false
+        correo = findViewById(R.id.correo)
+        contraseña = findViewById(R.id.contraseña)
+        nombre = findViewById(R.id.nombre)
+        cp= findViewById(R.id.postal)
+        edad= findViewById(R.id.nacimiento)
 
 
-        correo=findViewById<TextInputEditText>(R.id.correo)
-        contraseña=findViewById(R.id.contraseña)
-        enviar=findViewById(R.id.button)
-        nombre=findViewById(R.id.nombre)
-        cp=findViewById(R.id.postal)
-        edad=findViewById(R.id.nacimiento)
 
-        correo.doAfterTextChanged { texto ->
-            if (texto.isNullOrBlank()){
-                correo.setError("El correo no puede estar vacio")
-            }else if(!texto.contains("@gmail.com") && !texto.contains("@hotmail.com")){
-                correo.setError("El correo no puede estar incompleto")
-            }else{
-                bolcorreo=true
+
+        correo.addTextChangedListener {
+            if (it.isNullOrBlank() || !it.contains("@") || !it.contains(".")) {
+                correo.error = "Correo no completado con exito"
             }
         }
 
-        contraseña.doAfterTextChanged{
-            if(it.isNullOrBlank()){
-                contraseña.setError("La contraseña no puede estar vacia")
-            }else if(it.length<7){
-                contraseña.setError("La contraseña debe tener mas de 7 caracteres")
-            }else{
-                val regex = Regex("^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z]).*\$")
-                if (!it.matches(regex)){
-                    contraseña.setError("Debe contener al menos una letra minuscula, mayuscula y un numero")
-                }else{
-                    bolcontraseña=true
+        contraseña.addTextChangedListener {
+            println(it)
+            if (it != null) {
+                if (it.length < 7) {
+                    contraseña.error = "La contraseña es demasiado corta"
                 }
-            }
-        }
+                val regex = Regex("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).+\$")
 
+                if (it.matches(regex)) {
+                    println("entra")
 
-
-        cp.doAfterTextChanged {
-            if(it.isNullOrBlank()){
-                bolcp=true
-            }else if(it.length==5){
-                bolcp=true
-            }else{
-                cp.setError("El codigo postal debe ser valido")
-            }
-        }
-
-
-        edad.doAfterTextChanged {
-            if(it.isNullOrBlank()){
-                edad.setError("Este campo no puede quedar vacio")
-            }else{
-                if (edad.length()==10) {
-                    var split = it.split("/")
-                    var año = split[2].toInt()
-                    if (Calendar.YEAR - año >= 18) {
-                        boledad = true
-                    } else {
-                        edad.setError("Debes ser mayor de edad")
-                    }
+                } else {
+                    contraseña.error =
+                        ("La contraseña debe contener mayusc. minusc. y numeros ")
                 }
+            } else {
+                contraseña.error = "La contraseña no puede estar vacia"
+            }
+
+
+        }
+        nombre.addTextChangedListener{
+            if(it.isNullOrBlank()){
+                nombre.error="Esque no tienes nombre? Gilipollas"
+
             }
         }
 
+        cp.addTextChangedListener {
+            if (it.toString().length < 5 && it.toString().length>0) {
+                cp.error = "El CP es incorrecto"
+            }
         }
 
+        fun isAdult(dateOfBirth: String): Boolean {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val currentDate = Calendar.getInstance().time
 
+            try {
+                val birthDate = dateFormat.parse(dateOfBirth)
+                val calendarBirth = Calendar.getInstance().apply {
+                    time = birthDate
+                }
 
+                val age = Calendar.getInstance().get(Calendar.YEAR) - calendarBirth.get(Calendar.YEAR)
 
-    fun enviar(view: View) {
+                calendarBirth.set(Calendar.YEAR, Calendar.getInstance().get(Calendar.YEAR))
 
+                return if (calendarBirth.time.before(currentDate)) {
+                    age >= 18
+                } else {
+                    age - 1 >= 18
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                return false
+            }
+        }
+
+        edad.addTextChangedListener {
+            if (!isAdult(it.toString())) {
+                edad.error="Debes ser mayor de edad"
+            }else{
+
+            }
+        }
     }
+
+
 }

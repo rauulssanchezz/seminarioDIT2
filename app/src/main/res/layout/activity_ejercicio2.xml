@@ -4,49 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    tools:context=".Ejercicio2">
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layout1"
+        android:id="@+id/layoutUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        app:helperText="Escribe tu nombre"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nombre"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Nombre: "/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout1"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        app:helperText="Escribe cuantos niños tienes en el sotano"
-        >
-
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        app:helperText="Introduce tu nombre de usuario">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/niños"
+            android:id="@+id/layoutUsuarioText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Niños:"
-            android:inputType="number"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:inputType="text"
+            android:hint="Usuario:"
+            />
 
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutContrasena"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutUsuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        app:helperText="Introduce tu contraseña">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/layoutContrasenaText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:hint="Contraseña:"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutContrasena"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        app:helperText="Introduce tu correo electronico"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/layoutEmailText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textEmailAddress"
+            android:hint="Correo electronico:"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
     <Button
+        android:id="@+id/boton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -55,7 +75,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout2"
+        app:layout_constraintTop_toBottomOf="@id/layoutEmail"
         android:backgroundTint="@color/black"
         android:onClick="boton"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
